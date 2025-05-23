@@ -20,17 +20,26 @@ class _IMCState extends State<IMC> {
   final TextEditingController controlepeso = TextEditingController();
   final TextEditingController controlealt = TextEditingController();
 
-  void Calcular(){
+  void calcular(){
     setState(() {
     String textopeso = controlepeso.text;
     String textoalt = controlealt.text;
 
-    altura = double.parse(textoalt);
-    peso = double.parse(textopeso);
+    if(textoalt != null && textoalt != ""){
+      altura = double.parse(textoalt);
+    }else{
+      altura = 0;
+    }
+    if(textopeso != null && textopeso != ""){
+      peso = double.parse(textopeso);
+    }else{
+      peso = 0;
+    }
+    
     resultadoIMC = peso/(altura*altura);  
     }); 
   }
-  void Recaregar(){
+  void recaregar(){
     setState(() {
        controlepeso.text = "";
        controlealt.text = "";
@@ -39,18 +48,16 @@ class _IMCState extends State<IMC> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(centerTitle: true, backgroundColor: Colors.green,title: Text("Calculadora IMC",style: TextStyle(color: Colors.white),),actions: [IconButton(onPressed: Recaregar, icon: Icon(Icons.refresh,color: Colors.white,))]),
+    return Scaffold(appBar: AppBar(centerTitle: true, backgroundColor: Colors.green,title: Text("Calculadora IMC",style: TextStyle(color: Colors.white),),actions: [IconButton(onPressed: recaregar, icon: Icon(Icons.refresh,color: Colors.white,))]),
     
-    body: Container(padding: EdgeInsets.all(10),child: Column(children: [
+    body: Container(padding: EdgeInsets.all(10),child: Column(crossAxisAlignment: CrossAxisAlignment.stretch,children: [
     Icon(Icons.person_outline,size: 120,color: Colors.green,),
-    Row(children: [Text("Altura",style: TextStyle(fontWeight: FontWeight.bold),)]),
-    TextField(controller: controlealt,decoration: InputDecoration(hintText: "1.8 (Valor em Metros 1m 80cm)",),),
-    Row(children: [Text("Peso",style: TextStyle(fontWeight: FontWeight.bold),)],),
-    TextField(controller: controlepeso,decoration: InputDecoration(hintText: "50 (Valor em Peso 50Kg)"),),
+    TextField(textAlign: TextAlign.center,keyboardType: TextInputType.number,controller: controlealt,decoration: InputDecoration(labelText: 'Altura',hintText: "1.8 (Valor em Metros 1m 80cm)",labelStyle: TextStyle(color: Colors.green,fontWeight: FontWeight.bold)),),
+    TextField(textAlign: TextAlign.center,keyboardType: TextInputType.number,controller: controlepeso,decoration: InputDecoration(labelText: 'Peso',hintText: "50 (Valor em Peso 50Kg)",labelStyle: TextStyle(color: Colors.green,fontWeight: FontWeight.bold)),),
     SizedBox(height: 10,),
-    TextButton(onPressed: Calcular,style: TextButton.styleFrom(shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(0)),backgroundColor: Colors.green,fixedSize: Size(400, 40)), child: Text("Calcular",style: TextStyle(color: Colors.white,fontSize: 20),),),
+    ElevatedButton(onPressed: calcular,style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(0)),backgroundColor: Colors.green,), child: Text("Calcular",style: TextStyle(color: Colors.white,fontSize: 20),),),
     SizedBox(height: 10,),
-    Text((resultadoIMC<=0)?"Calcule seu IMC": (resultadoIMC<18.5)?"Seu peso esta abaixo da media: IMC ${resultadoIMC.toString()}": (resultadoIMC<24.9)? "Seu peso esta na media: IMC ${resultadoIMC.toString()}":"Você esta acima do peso: IMC ${resultadoIMC.toString()}")],),),
+    Text(style: TextStyle(fontSize: 18,color: Colors.green),textAlign: TextAlign.center,(resultadoIMC<=0)?"Informação": (resultadoIMC<18.5)?"Seu peso esta abaixo da media: IMC ${resultadoIMC.toString()}": (resultadoIMC<24.9)? "Seu peso esta na media: IMC ${resultadoIMC.toString()}":"Você esta acima do peso: IMC ${resultadoIMC.toString()}")],),),
     
     );
   }
