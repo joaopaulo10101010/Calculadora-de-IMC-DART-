@@ -30,10 +30,16 @@ class _IMCState extends State<IMC> {
     resultadoIMC = peso/(altura*altura);  
     }); 
   }
+  void Recaregar(){
+    setState(() {
+       controlepeso.text = "";
+       controlealt.text = "";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(centerTitle: true, backgroundColor: Colors.green,title: Text("Calculadora IMC",style: TextStyle(color: Colors.white),),),
+    return Scaffold(appBar: AppBar(centerTitle: true, backgroundColor: Colors.green,title: Text("Calculadora IMC",style: TextStyle(color: Colors.white),),actions: [IconButton(onPressed: Recaregar, icon: Icon(Icons.refresh,color: Colors.white,))]),
     
     body: Container(padding: EdgeInsets.all(10),child: Column(children: [
     Icon(Icons.person,size: 100,color: Colors.orange,),
