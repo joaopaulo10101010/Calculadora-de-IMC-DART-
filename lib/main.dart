@@ -25,12 +25,12 @@ class _IMCState extends State<IMC> {
     String textopeso = controlepeso.text;
     String textoalt = controlealt.text;
 
-    if(textoalt != null && textoalt != ""){
+    if(textoalt != ""){
       altura = double.parse(textoalt);
     }else{
       altura = 0;
     }
-    if(textopeso != null && textopeso != ""){
+    if(textopeso != ""){
       peso = double.parse(textopeso);
     }else{
       peso = 0;
