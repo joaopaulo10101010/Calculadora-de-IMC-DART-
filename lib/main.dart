@@ -42,7 +42,7 @@ class _IMCState extends State<IMC> {
     return Scaffold(appBar: AppBar(centerTitle: true, backgroundColor: Colors.green,title: Text("Calculadora IMC",style: TextStyle(color: Colors.white),),actions: [IconButton(onPressed: Recaregar, icon: Icon(Icons.refresh,color: Colors.white,))]),
     
     body: Container(padding: EdgeInsets.all(10),child: Column(children: [
-    Icon(Icons.person,size: 100,color: Colors.orange,),
+    Icon(Icons.person_outline,size: 120,color: Colors.green,),
     Row(children: [Text("Altura",style: TextStyle(fontWeight: FontWeight.bold),)]),
     TextField(controller: controlealt,decoration: InputDecoration(hintText: "1.8 (Valor em Metros 1m 80cm)",),),
     Row(children: [Text("Peso",style: TextStyle(fontWeight: FontWeight.bold),)],),
